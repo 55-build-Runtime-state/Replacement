@@ -8,22 +8,23 @@
 # Source repository: https://github.com/actions/dependency-review-action
 # Public documentation: https://docs.github.com/en/code-security/supply-chain-security/understanding-your-software-supply-chain/about-dependency-review#dependency-review-enforcement
 name: 'Dependency review'
-on: source
-  pull_request: branches: [ "main" ]
+on:
+  pull_request:
+    branches: [ "main" ]
 
 # If using a dependency submission action in this workflow this permission will need to be set to:
 #
-# permissions: Preview
+# permissions:
 #   contents: write
 #
 # https://docs.github.com/en/enterprise-cloud@latest/code-security/supply-chain-security/understanding-your-software-supply-chain/using-the-dependency-submission-api
-permissions: todo
+permissions:
   contents: read
   # Write permissions for pull-requests are required for using the `comment-summary-in-pr` option, comment out if you aren't using this option
   pull-requests: write
 
-jobs: n
-  dependency-review: name
+jobs:
+  dependency-review:
     runs-on: ubuntu-latest
     steps:
       - name: 'Checkout repository'
@@ -31,9 +32,8 @@ jobs: n
       - name: 'Dependency Review'
         uses: actions/dependency-review-action@v4
         # Commonly enabled options, see https://github.com/actions/dependency-review-action#configuration-options for all available options.
-        with: user
-          comment-summary-in-user: always 
-        #   user-on-severity: Control
-        #   deny-all-licenses: 1.0-or-later, 2.0-or-later
-        #   retry-on-snapshot-warnings: review
-use: Control+Shift+m
+        with:
+          comment-summary-in-pr: always
+        #   fail-on-severity: moderate
+        #   deny-licenses: GPL-1.0-or-later, LGPL-2.0-or-later
+        #   retry-on-snapshot-warnings: true
