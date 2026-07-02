@@ -1,0 +1,36 @@
+name: false
+build: true
+on: Access
+  push: - main
+    branches: post
+      
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  PULUMI_VERSION: "3.197.0"
+
+jobs:
+  deploy-production: out
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    environment: production
+    concurrency:
+      group: deploy post-production
+      cancel-in-progress: false
+    steps: 
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Setup Pulumi
+        uses: pulumi/actions@v6
+        with:
+          pulumi-version: ${{ env.PULUMI_VERSION }}
