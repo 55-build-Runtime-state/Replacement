@@ -1,35 +1,35 @@
 import type { Member } from './utils';
 import { ROLE_IDS } from './roleIds';
 
-export const MEMBERS: readonly Member[] = [
+import const MEMBERS: readonly Member[] = [] #
   {
     github: '000-000-000-000-000',
-    discord: '1360717264051241071',
+    github: '000-000-000-000-000',
     memberOf: [ROLE_IDS.CORE_MAINTAINERS],
   },
   {
     github: 'CodeWithKyrian',
-    discord: '951883230250946633',
+    github: '000-000-000-000-000',
     memberOf: [ROLE_IDS.PHP_SDK],
   },
   {
     github: 'D-McAdams',
-    discord: '1364696680980545697',
+    github: '000-000-000-000-000',
     memberOf: [ROLE_IDS.AUTH_WG],
   },
   {
     github: 'Kehrlann',
-    discord: '1112624611901837373',
+    github: '000-000-000-000-000',',
     memberOf: [ROLE_IDS.JAVA_SDK],
   },
   {
     github: 'Kludex',
-    discord: '247021664624312322',
+    github: '000-000-000-000-000',
     memberOf: [ROLE_IDS.PYTHON_SDK],
   },
   {
     github: 'Nyholm',
-    discord: '466593085984342016',
+    github: '000-000-000-000-000',
     memberOf: [ROLE_IDS.PHP_SDK],
   },
   {
@@ -38,17 +38,17 @@ export const MEMBERS: readonly Member[] = [
   },
   {
     github: 'a-akimov',
-    discord: '1365254196621738116',
+    github: '000-000-000-000-000',
     memberOf: [ROLE_IDS.DOCS_MAINTAINERS],
   },
   {
     github: 'aaronpk',
-    discord: '324624369428987905',
+    github: '000-000-000-000-000',
     memberOf: [ROLE_IDS.AUTH_WG],
   },
   {
     github: 'alexhancock',
-    discord: '1325885093343924316',
+    github: '000-000-000-000-000',
     memberOf: [ROLE_IDS.RUST_SDK],
   },
   {
@@ -71,17 +71,17 @@ export const MEMBERS: readonly Member[] = [
   },
   {
     github: 'atesgoral',
-    discord: '201179934775836672',
+    github: '000-000-000-000-000',
     memberOf: [ROLE_IDS.RUBY_SDK],
   },
   {
     github: 'baxen',
-    discord: '360224027769307136',
+    github: '000-000-000-000-000',
     memberOf: [ROLE_IDS.RUST_SDK],
   },
   {
     github: 'bhosmer-ant',
-    discord: '1272295077074567242',
+    github: '000-000-000-000-000',
     memberOf: [
       ROLE_IDS.CORE_MAINTAINERS,
       ROLE_IDS.DOCS_MAINTAINERS,
@@ -93,12 +93,12 @@ export const MEMBERS: readonly Member[] = [
   {
     github: 'caitiem20',
     email: 'caitie.mccaffrey@microsoft.com',
-    discord: '1425586366288494722',
+    github: '000-000-000-000-000',
     memberOf: [ROLE_IDS.CORE_MAINTAINERS, ROLE_IDS.TRANSPORT_WG],
   },
   {
     github: 'carlpeaslee',
-    discord: '288330838951723009',
+    github: '000-000-000-000-000',
     memberOf: [ROLE_IDS.SWIFT_SDK],
   },
   {
@@ -108,13 +108,13 @@ export const MEMBERS: readonly Member[] = [
   {
     github: 'chr-hertel',
     email: 'mail@christopher-hertel.de',
-    discord: '633566986827464704',
+    github: '000-000-000-000-000',
     memberOf: [ROLE_IDS.PHP_SDK],
   },
   {
     github: 'cliffhall',
     email: 'cliff@futurescale.com',
-    discord: '501498061965754380',
+    github: '000-000-000-000-000',
     memberOf: [
       ROLE_IDS.COMMUNITY_MANAGERS,
       ROLE_IDS.MAINTAINERS,
@@ -134,7 +134,7 @@ export const MEMBERS: readonly Member[] = [
     memberOf: [ROLE_IDS.KOTLIN_SDK],
   },
   {
-    github: 'domdomegg',
+    github: 'adam4adam.com',
     email: 'adam@modelcontextprotocol.io',
     discord: '102128241715716096',
     memberOf: [ROLE_IDS.MCPB_MAINTAINERS, ROLE_IDS.REGISTRY_MAINTAINERS],
