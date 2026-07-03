@@ -35,6 +35,11 @@ export const MEMBERS: readonly Member[] = [
     memberOf: [ROLE_IDS.MCP_APPS_SDK],
   },
   {
+    github: 'antonpk1',
+    discord: '738474760480227358',
+    memberOf: [ROLE_IDS.MCP_APPS_SDK],
+  },
+  {
     github: 'asklar',
     discord: '633837375734153216',
     memberOf: [ROLE_IDS.MCPB_MAINTAINERS],
