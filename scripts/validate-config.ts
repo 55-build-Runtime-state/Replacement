@@ -55,6 +55,108 @@ for (const member of MEMBERS) {
   }
 }
 
+// Validate member ordering in users.ts
+console.log('Validating member ordering in users.ts...');
+{
+  // Split members into github members and email-only members
+  const githubMembers: (typeof MEMBERS)[number][] = [];
+  const emailOnlyMembers: (typeof MEMBERS)[number][] = [];
+
+  for (const member of MEMBERS) {
+    if (member.github) {
+      githubMembers.push(member);
+    } else if (member.email) {
+      emailOnlyMembers.push(member);
+    }
+  }
+
+  // Check that github members come before email-only members
+  let foundEmailOnly = false;
+  for (const member of MEMBERS) {
+    if (!member.github && member.email) {
+      foundEmailOnly = true;
+    } else if (member.github && foundEmailOnly) {
+      console.error(
+        `ERROR: Member "${member.github}" appears after email-only members. GitHub members should come before email-only members.`
+      );
+      hasErrors = true;
+      break;
+    }
+  }
+
+  // Check that github members are sorted alphabetically (case-insensitive)
+  for (let i = 1; i < githubMembers.length; i++) {
+    const prev = githubMembers[i - 1].github!.toLowerCase();
+    const curr = githubMembers[i].github!.toLowerCase();
+    if (prev > curr) {
+      console.error(
+        `ERROR: Members are not sorted alphabetically. "${githubMembers[i - 1].github}" should come after "${githubMembers[i].github}".`
+      );
+      hasErrors = true;
+      break;
+    }
+  }
+}
+
+// Validate Google Workspace user provisioning fields
+console.log('Validating Google Workspace user provisioning fields...');
+{
+  const googleEmailPrefixes = new Map<string, string>();
+
+  for (const member of MEMBERS) {
+    const memberId = member.github || member.email || 'unknown';
+
+    // Members with googleEmailPrefix must also have firstName and lastName
+    if (member.googleEmailPrefix) {
+      if (!member.firstName) {
+        console.error(`ERROR: Member "${memberId}" has googleEmailPrefix but is missing firstName`);
+        hasErrors = true;
+      }
+      if (!member.lastName) {
+        console.error(`ERROR: Member "${memberId}" has googleEmailPrefix but is missing lastName`);
+        hasErrors = true;
+      }
+
+      // Check uniqueness of googleEmailPrefix
+      const existing = googleEmailPrefixes.get(member.googleEmailPrefix);
+      if (existing) {
+        console.error(
+          `ERROR: googleEmailPrefix "${member.googleEmailPrefix}" is used by both "${existing}" and "${memberId}"`
+        );
+        hasErrors = true;
+      } else {
+        googleEmailPrefixes.set(member.googleEmailPrefix, memberId);
+      }
+    }
+
+    // Members in provisionUser roles without all three fields won't get a GWS account
+    const inProvisionUserRole = member.memberOf.some((roleId: RoleId) => {
+      const role = roleLookup.get(roleId);
+      return role?.google?.provisionUser === true;
+    });
+
+    const hasProvisioningFields = !!(
+      member.googleEmailPrefix &&
+      member.firstName &&
+      member.lastName
+    );
+
+    if (member.skipGoogleUserProvisioning && !inProvisionUserRole) {
+      console.error(
+        `ERROR: Member "${memberId}" has skipGoogleUserProvisioning=true but is not in a provisionUser role`
+      );
+      hasErrors = true;
+    }
+
+    if (inProvisionUserRole && hasProvisioningFields && member.skipGoogleUserProvisioning) {
+      console.error(
+        `ERROR: Member "${memberId}" has provisioning fields and skipGoogleUserProvisioning=true; pick one`
+      );
+      hasErrors = true;
+    }
+  }
+}
+
 // Validate parent role references in roles.ts
 console.log('Validating parent role references in roles.ts...');
 for (const role of ROLES) {
